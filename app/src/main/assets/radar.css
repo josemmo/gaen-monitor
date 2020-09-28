@@ -1,0 +1,103 @@
+/* MAIN CONTAINER */
+.radar {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 90vw;
+    height: 90vw;
+    transform: translate(-50%, -50%);
+}
+@media (orientation: landscape) {
+    .radar {
+        width: 90vh;
+        height: 90vh;
+    }
+}
+
+
+/* PEOPLE COUNT */
+.people-count {
+    position: absolute;
+    display: flex;
+    right: 15px;
+    top: 15px;
+    color: var(--fg-color);
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 1em;
+    align-items: center;
+}
+.people-count svg.icon {
+    float: left;
+    fill: currentColor;
+    width: 0.8em;
+    height: 0.8em;
+    margin-right: 0.4em;
+}
+
+
+/* CENTER AND CLIENTS */
+.radar .center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 8%;
+    height: 8%;
+    background: var(--primary-color);
+    box-shadow: 0 0 3rem var(--primary-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    will-change: box-shadow;
+    animation: beam 2s infinite ease-in-out alternate;
+    z-index: 3;
+}
+@keyframes beam {
+    to {
+        box-shadow: 0 0 8rem 2rem var(--primary-color);
+    }
+}
+
+.radar .client {
+    position: absolute;
+    width: 4%;
+    height: 4%;
+    background: var(--secondary-color);
+    box-shadow: 0 0 2rem -0.2rem var(--secondary-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    will-change: left, top, opacity;
+    transition: left 0.2s linear, top 0.2s linear, opacity 0.2s linear;
+    z-index: 3;
+}
+
+
+/* CONCENTRIC CIRCLES */
+.radar .circle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: solid 1vw var(--fg-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.05;
+    z-index: 1;
+}
+@media (orientation: landscape) {
+    .radar .circle {
+        border-width: 1vh;
+    }
+}
+
+.radar .circle.c-1 {
+    width: 30%;
+    height: 30%;
+}
+.radar .circle.c-2 {
+    width: 62%;
+    height: 62%;
+}
+.radar .circle.c-3 {
+    width: 95%;
+    height: 95%;
+}

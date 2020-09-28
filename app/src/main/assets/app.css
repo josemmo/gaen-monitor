@@ -1,0 +1,21 @@
+/* COMMON */
+:root {
+    --primary-color: #0e9489;
+    --secondary-color: #0f77d8;
+    --fg-color: #fff;
+    --bg-color: #222;
+}
+body {
+    margin: 0;
+    font-family: 'Roboto', 'Arial', sans-serif;
+}
+
+
+/* SECTIONS */
+.section-radar {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-color);
+    overflow: hidden;
+}

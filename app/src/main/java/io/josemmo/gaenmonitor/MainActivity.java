@@ -1,12 +1,15 @@
 package io.josemmo.gaenmonitor;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -18,7 +21,10 @@ import io.josemmo.gaenmonitor.scanner.GaenBeacon;
 import io.josemmo.gaenmonitor.scanner.GaenScanner;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE = 100;
+
     private WebView webView;
+    private GaenScanner scanner;
     private List<GaenBeacon> beacons = new ArrayList<>();
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -41,10 +47,9 @@ public class MainActivity extends AppCompatActivity {
         // Load UI document
         webView.loadUrl("file:///android_asset/index.html");
 
-        // Start GAEN scanner
-        GaenScanner scanner = new GaenScanner();
+        // Initialize GAEN scanner
+        scanner = new GaenScanner();
         scanner.setOnBeaconListChangeListener(beacons -> this.beacons = beacons);
-        scanner.start();
 
         // Schedule UI update
         Timer timer = new Timer();
@@ -54,6 +59,27 @@ public class MainActivity extends AppCompatActivity {
                webView.post(() -> updateUi());
            }
        }, 0, 2000);
+
+        // Initialize app
+        requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+    }
+
+
+    /**
+     * On request permissions result
+     * @param requestCode  Request code
+     * @param permissions  List of permissions
+     * @param grantResults List of grant results
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode != REQUEST_CODE) return;
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            scanner.start();
+        } else {
+            finishAffinity();
+            System.exit(1);
+        }
     }
 
 

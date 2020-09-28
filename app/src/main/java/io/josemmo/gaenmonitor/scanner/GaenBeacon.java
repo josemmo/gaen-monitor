@@ -4,6 +4,8 @@ import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanResult;
 import android.os.SystemClock;
 
+import androidx.annotation.Nullable;
+
 import io.josemmo.gaenmonitor.Utils;
 
 public class GaenBeacon {
@@ -17,6 +19,7 @@ public class GaenBeacon {
      * @param  result Scan result
      * @return        Beacon or NULL in case of not a beacon
      */
+    @Nullable
     public static GaenBeacon fromScanResult(ScanResult result) {
         ScanRecord scanRecord = result.getScanRecord();
         if (scanRecord == null) {

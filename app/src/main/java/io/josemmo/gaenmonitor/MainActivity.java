@@ -1,12 +1,13 @@
 package io.josemmo.gaenmonitor;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.TimerTask;
 import io.josemmo.gaenmonitor.scanner.GaenBeacon;
 import io.josemmo.gaenmonitor.scanner.GaenScanner;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     private WebView webView;
     private List<GaenBeacon> beacons = new ArrayList<>();
 
